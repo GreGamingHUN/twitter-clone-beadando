@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PagesModule } from './components/pages/pages.module';
 
 const routes: Routes = [
-  
+  // A route-ok a pages.module.ts-ben vannak megvalositva
 ];
 
 @NgModule({
