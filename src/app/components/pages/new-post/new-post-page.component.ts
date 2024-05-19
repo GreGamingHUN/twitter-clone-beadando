@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../../../services/posts.service';
 import { AuthService } from '../../../auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-post-page',
@@ -12,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NewPostPageComponent {
   postForm: FormGroup;
 
-  constructor(private postService: PostService, private authService: AuthService, private _snackBar: MatSnackBar) {
+  constructor(private postService: PostService, private authService: AuthService, private _snackBar: MatSnackBar, private router: Router) {
     this.postForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
       theme: new FormControl('', [Validators.required]),
@@ -31,6 +32,7 @@ export class NewPostPageComponent {
           duration: 2000,
         });
         this.postForm.reset();
+        this.router.navigate(['/']);
       });
     });
   }
