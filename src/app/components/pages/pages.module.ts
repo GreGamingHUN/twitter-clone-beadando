@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './login/login.component';
 import { UiModule } from '../ui/ui.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterPageComponent } from './register/register.component';
 import { AuthGuard } from '../../auth/auth.guard';
@@ -11,9 +11,11 @@ import { HomePageComponent } from './home/home.component';
 import { NewPostPageComponent } from './new-post/new-post-page.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { DatumPipe } from '../../pipes/datum.pipe';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatDividerModule} from '@angular/material/divider';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -41,6 +43,9 @@ const routes: Routes = [
     MatIconModule,
     MatSelectModule,
     MatInputModule,
+    MatButtonToggleModule,
+    FormsModule,
+    MatDividerModule
   ],
   exports: [
     UiModule,
