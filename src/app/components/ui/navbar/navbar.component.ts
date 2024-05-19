@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
@@ -8,17 +9,22 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class NavbarComponent implements OnInit{
   isLoggedIn = false;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    let accountData = this.authService.getCurrentUser();
-    console.log(accountData)
-    if (accountData !== null) {
-      this.isLoggedIn = true;
-    }
+    this.authService.getCurrentUser().subscribe((user) => {
+      if (user) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
   }
 
   async logout() {
-    this.authService.logout();
+    this.authService.logout().then(() => {
+      this.isLoggedIn = false;
+      this._snackBar.open("Sikeres kijelentkezés", undefined, {duration: 2000});
+    });
   }
 }
