@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { config } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,33 +13,32 @@ export class AuthService {
   async login(email: string, password: string) {
     try {
       let result = await this.afAuth.signInWithEmailAndPassword(email, password);
-      this._snackBar.open("Sikeres bejelentkezés"); 
+      this._snackBar.open("Sikeres bejelentkezés", undefined, {duration: 2000}); 
     } catch (error) {
       console.error('Error logging in:', error);
     }
 
     await this.afAuth.signInWithEmailAndPassword(email, password).then((result) => {
-      this._snackBar.open("Sikeres bejelentkezés");
+      this._snackBar.open("Sikeres bejelentkezés", undefined, {duration: 2000});
     }).catch((error) => {
-      this._snackBar.open("Hiba: " + error.message); 
+      this._snackBar.open("Hiba: " + error.message, undefined, {duration: 2000}); 
     });
   }
 
   async register(email: string, password: string, displayName: string) {
       await this.afAuth.createUserWithEmailAndPassword(email, password).then((result) => {
-        this._snackBar.open("Sikeres regisztráció");
         result.user?.updateProfile({
           displayName: displayName
         }).then(() => {
-          this._snackBar.open("Sikeres regisztráció");
+          this._snackBar.open("Sikeres regisztráció", undefined, {duration: 2000});
         }).catch((error) => {
-          this._snackBar.open("Hiba: " + error.message);
+          this._snackBar.open("Hiba: " + error.message, undefined, {duration: 2000});
         });
       }).catch((error) => {
         if (error.code === 'auth/email-already-in-use') {
-          this._snackBar.open("Ez az e-mail cím már foglalt"); 
+          this._snackBar.open("Ez az e-mail cím már foglalt", undefined, {duration: 2000}); 
         } else {
-          this._snackBar.open("Hiba: " + error.message); 
+          this._snackBar.open("Hiba: " + error.message, undefined, {duration: 2000}); 
         }
       })
   }
@@ -48,10 +48,6 @@ export class AuthService {
   }
 
   async logout() {
-    return this.afAuth.signOut().then(() => {
-      this._snackBar.open("Sikeres kijelentkezés");
-    }).catch((error) => {
-      console.log('Error logging out:', error);
-    });
+    return this.afAuth.signOut();
   }
 }
