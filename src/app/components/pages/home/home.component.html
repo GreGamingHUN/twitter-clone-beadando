@@ -1,5 +1,25 @@
-<h1>Helló, {{displayName}}</h1>
-<h2>Tegyél ki új postot a Hozzáadás gombbal (jobb alsó sarok)</h2>
+<h1 style="margin: 15px;">Helló, {{displayName}}</h1>
+<h2 style="margin: 20px;">Tegyél ki új postot a Hozzáadás gombbal (jobb alsó sarok)</h2>
+<div style="display: flex; flex-direction: column; align-items: center">
+    <mat-card *ngFor="let post of posts" style="margin: 15PX; width: 90%">
+        <mat-card-header>
+            <mat-card-title>
+                <h2>
+                    {{post.title}}
+                </h2>
+            </mat-card-title>
+            <mat-card-subtitle style="margin-top: -25px; margin-bottom: 10px;">
+                {{post.theme}}
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content >
+            {{post.content}}
+        </mat-card-content>
+        <mat-card-footer style="margin: 15px; position: relative;">
+            Felhasználó: {{post.username}}, <p style="position: absolute; right: 0; bottom: 0; color: gray;">Dátum: {{post.postDate}}</p>
+        </mat-card-footer>
+    </mat-card>
+</div>
 <button class="new_post" mat-fab color="primary" aria-label="Új post létrehozása" [routerLink]="'/new-post'">
     <mat-icon>add</mat-icon>
 </button>
