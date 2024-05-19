@@ -13,6 +13,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { DatumPipe } from '../../pipes/datum.pipe';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
     RegisterPageComponent,
     AccountPageComponent,
     HomePageComponent,
-    NewPostPageComponent
+    NewPostPageComponent,
+    DatumPipe
   ],
   imports: [
     CommonModule,
@@ -38,11 +40,11 @@ const routes: Routes = [
     MatChipsModule,
     MatIconModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
   ],
   exports: [
     UiModule,
-    LoginPageComponent
+    LoginPageComponent,
   ]
 })
 export class PagesModule { }
