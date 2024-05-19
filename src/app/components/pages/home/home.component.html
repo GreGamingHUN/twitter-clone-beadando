@@ -16,7 +16,7 @@
             {{post.content}}
         </mat-card-content>
         <mat-card-footer style="margin: 15px; position: relative;">
-            Felhasználó: {{post.username}}, <p style="position: absolute; right: 0; bottom: 0; color: gray;">Dátum: {{post.postDate}}</p>
+            Felhasználó: {{post.username}}, <p style="position: absolute; right: 0; bottom: 0; color: gray;">Dátum: {{post.postDate | datum}}</p>
         </mat-card-footer>
     </mat-card>
 </div>
