@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPageComponent {
   loginForm: FormGroup;
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
@@ -19,6 +20,8 @@ export class LoginPageComponent {
 
   login() {
     const { email, password } = this.loginForm.value;
-    this.authService.login(email, password);
+    this.authService.login(email, password).then(() => {
+      this.router.navigate(['/']);
+    });
   }
 }
