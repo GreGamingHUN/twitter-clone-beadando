@@ -9,7 +9,11 @@ export class PostService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  getPosts(username?: string) {
+  getPosts(username?: string, filter?: string) {
+    if (filter) {
+      return this.firestore.collection('posts', ref => ref.where('theme', '==', filter)).get();
+    }
+
     if (username) {
       return this.firestore.collection('posts', ref => ref.where('username', '==', username)).get();
     }
@@ -19,4 +23,8 @@ export class PostService {
     return this.firestore.collection('posts').add(post);
   }
   
+  deletePost(id: string) {
+    return this.firestore.collection('posts').doc(id).delete();
+  }
+
 }
